@@ -1,0 +1,19 @@
+{
+	"name": "LS_adevsql",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=a-dev-sqlsrv.database.windows.net;Initial Catalog=adevdb;User ID=sqladmin",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "LS_adevkeyvault",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "asqldev"
+			}
+		}
+	}
+}

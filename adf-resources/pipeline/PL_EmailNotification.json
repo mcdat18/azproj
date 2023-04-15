@@ -1,0 +1,88 @@
+{
+	"name": "PL_EmailNotification",
+	"properties": {
+		"description": "ADFCookbook",
+		"activities": [
+			{
+				"name": "ac_lkpEmail",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "SELECT * FROM EmailRecipient",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "DS_AzSQL",
+						"type": "DatasetReference",
+						"parameters": {
+							"tableName": "EmailRecipients"
+						}
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "ac_forEachEmail",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "ac_lkpEmail",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('ac_lkpEmail').output.value",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "ac_sendEmail",
+							"type": "WebActivity",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"url": "https://prod-17.eastus.logic.azure.com:443/workflows/c1bf24aeea0c465d9c20399f75878e15/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=V22NvtRODfaqlC2Vs9mGQK1tqnWFgBPBpS4AXMpgK-g",
+								"method": "POST",
+								"headers": {
+									"Content-Type": "application/json"
+								},
+								"body": {
+									"value": "@json(concat('{\"emailAddress\": \"', item().emailAddress, '\", \"subject\": \"ADF Pipeline Failure\", \"messageBody\": \"ADF Orchestration 4 Pipeline Failed Notification\"}'))",
+									"type": "Expression"
+								}
+							}
+						}
+					]
+				}
+			}
+		],
+		"folder": {
+			"name": "MetadataAudit_1"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-03-28T22:07:13Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
