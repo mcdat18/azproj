@@ -1,0 +1,122 @@
+{
+	"name": "PL_SQL_to_ADLS",
+	"properties": {
+		"activities": [
+			{
+				"name": "L_Get_Tables",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "DS_CDEV_DB",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "FE_Iterate_Tables",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "L_Get_Tables",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('L_Get_Tables').output.value",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "C_SQL_To_Lake",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "AzureSqlSource",
+									"sqlReaderQuery": {
+										"value": "SELECT * FROM @{item().Table_Name}",
+										"type": "Expression"
+									},
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "ParquetSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "ParquetWriteSettings"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "DS_widb02",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DS_ADLS2_Parquet",
+									"type": "DatasetReference",
+									"parameters": {
+										"containerName": "bronze",
+										"folderName": "rl-sql-001",
+										"table_name": {
+											"value": "@item().Table_Name",
+											"type": "Expression"
+										},
+										"table_catalog": {
+											"value": "@item().table_catalog",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"folder": {
+			"name": "SQLDynamicLoad"
+		},
+		"annotations": []
+	}
+}
