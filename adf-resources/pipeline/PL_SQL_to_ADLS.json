@@ -100,11 +100,11 @@
 										"containerName": "bronze",
 										"folderName": "rl-sql-001",
 										"table_name": {
-											"value": "@item().Table_Name",
+											"value": "@{item().Table_Name}",
 											"type": "Expression"
 										},
 										"table_catalog": {
-											"value": "@item().table_catalog",
+											"value": "@{item().Table_Catalog}",
 											"type": "Expression"
 										}
 									}
