@@ -99,6 +99,14 @@
 									"referenceName": "DS_ADLS2_CSV",
 									"type": "DatasetReference",
 									"parameters": {
+										"containerName": {
+											"value": "@pipeline().parameters.containerName",
+											"type": "Expression"
+										},
+										"folderName": {
+											"value": "@pipeline().parameters.folderName",
+											"type": "Expression"
+										},
 										"table_name": "@{item().Table_Name}",
 										"table_catalog": {
 											"value": "@{item().Table_Catalog}",
