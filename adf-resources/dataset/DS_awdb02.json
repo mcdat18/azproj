@@ -1,8 +1,8 @@
 {
-	"name": "DS_widb02",
+	"name": "DS_awdb02",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "LS_SQL_widb02",
+			"referenceName": "LS_SQL_awdb01",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
