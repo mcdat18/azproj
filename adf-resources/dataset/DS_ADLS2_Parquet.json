@@ -28,7 +28,7 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": {
-					"value": "@{item().Table_Name}/@{formatDateTime(utcnow(),'yyyy')}/\r\n@{formatDateTime(utcnow(),'MM')}/@{formatDateTime(utcnow()'dd')}/\r\n@{item().Table_Name}@{formatDateTime(utcnow(),'HH')}",
+					"value": "@{item().Table_Name}/@{formatDateTime(utcnow(),'yyyy')}/\n@{formatDateTime(utcnow(),'MM')}/@{formatDateTime(utcnow(),'dd')}/\n@{item().Table_Name}@{formatDateTime(utcnow(),'HH')}",
 					"type": "Expression"
 				},
 				"folderPath": {
