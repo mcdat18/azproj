@@ -1,0 +1,15 @@
+{
+	"name": "DS_widb02",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQL_widb02",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SQLDynamicLoad"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}
