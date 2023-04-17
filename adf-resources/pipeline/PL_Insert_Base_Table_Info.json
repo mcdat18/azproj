@@ -1,6 +1,35 @@
 {
-	"name": "pipeline1",
+	"name": "PL_Insert_Base_Table_Info",
 	"properties": {
+		"activities": [
+			{
+				"name": "ac_CP_DBObjects",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false
+				},
+				"outputs": [
+					{
+						"referenceName": "DS_CDEV_DB",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
 		"folder": {
 			"name": "SQLDynamicLoad"
 		},
