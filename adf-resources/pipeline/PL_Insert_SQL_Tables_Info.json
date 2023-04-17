@@ -1,5 +1,5 @@
 {
-	"name": "PL_Insert_Base_Table_Info",
+	"name": "PL_Insert_SQL_Tables_Info",
 	"properties": {
 		"activities": [
 			{
