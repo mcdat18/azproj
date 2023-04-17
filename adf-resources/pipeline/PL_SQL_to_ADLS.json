@@ -67,12 +67,44 @@
 									"queryTimeout": "02:00:00",
 									"partitionOption": "None"
 								},
-								"enableStaging": false
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
 							},
 							"inputs": [
 								{
 									"referenceName": "DS_awdb02",
 									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DS_ADLS2_CSV",
+									"type": "DatasetReference",
+									"parameters": {
+										"table_name": "@{item().Table_Name}",
+										"table_catalog": {
+											"value": "@{item().Table_Catalog}",
+											"type": "Expression"
+										}
+									}
 								}
 							]
 						}
@@ -80,6 +112,16 @@
 				}
 			}
 		],
+		"parameters": {
+			"containerName": {
+				"type": "string",
+				"defaultValue": "bronze"
+			},
+			"folderName": {
+				"type": "string",
+				"defaultValue": "rl-sql-001"
+			}
+		},
 		"folder": {
 			"name": "SQLDynamicLoad"
 		},
