@@ -17,6 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
+						"sqlReaderQuery": "SELECT Quotename(table_schema) + '.'\n       + Quotename(table_name) AS Table_Name,\n       table_catalog\nFROM   information_schema.tables\nWHERE  table_type = 'BASE TABLE'",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
