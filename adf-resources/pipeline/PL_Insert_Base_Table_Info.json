@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "ac_CP_DBObjects",
+				"name": "C_DBObjects",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
