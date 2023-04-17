@@ -67,47 +67,12 @@
 									"queryTimeout": "02:00:00",
 									"partitionOption": "None"
 								},
-								"sink": {
-									"type": "ParquetSink",
-									"storeSettings": {
-										"type": "AzureBlobFSWriteSettings"
-									},
-									"formatSettings": {
-										"type": "ParquetWriteSettings"
-									}
-								},
-								"enableStaging": false,
-								"translator": {
-									"type": "TabularTranslator",
-									"typeConversion": true,
-									"typeConversionSettings": {
-										"allowDataTruncation": true,
-										"treatBooleanAsNumber": false
-									}
-								}
+								"enableStaging": false
 							},
 							"inputs": [
 								{
 									"referenceName": "DS_awdb02",
 									"type": "DatasetReference"
-								}
-							],
-							"outputs": [
-								{
-									"referenceName": "DS_ADLS2_Parquet",
-									"type": "DatasetReference",
-									"parameters": {
-										"containerName": "bronze",
-										"folderName": "rl-sql-001",
-										"table_name": {
-											"value": "@{item().Table_Name}",
-											"type": "Expression"
-										},
-										"table_catalog": {
-											"value": "@{item().Table_Catalog}",
-											"type": "Expression"
-										}
-									}
 								}
 							]
 						}
