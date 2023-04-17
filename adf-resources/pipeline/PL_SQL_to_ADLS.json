@@ -23,7 +23,8 @@
 					"dataset": {
 						"referenceName": "DS_CDEV_DB",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": false
 				}
 			},
 			{
