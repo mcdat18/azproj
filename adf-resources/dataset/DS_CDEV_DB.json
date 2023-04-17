@@ -1,0 +1,37 @@
+{
+	"name": "DS_CDEV_DB",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_adevsql",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SQLDynamicLoad"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "parameter_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "table_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "table_catalog",
+				"type": "nvarchar"
+			},
+			{
+				"name": "process_type",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "pipeline_parameter1"
+		}
+	}
+}

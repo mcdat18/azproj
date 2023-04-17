@@ -1,0 +1,15 @@
+{
+	"name": "DS_ADevSQL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_adevsql",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SQLDynamicLoad"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}
