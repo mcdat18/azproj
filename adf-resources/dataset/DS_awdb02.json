@@ -1,0 +1,58 @@
+{
+	"name": "DS_awdb02",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQL_awdb01",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SQLDynamicLoad"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "CityID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CityName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "StateProvinceID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Location",
+				"type": "geography"
+			},
+			{
+				"name": "LatestRecordedPopulation",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "LastEditedBy",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ValidFrom",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "ValidTo",
+				"type": "datetime2",
+				"scale": 7
+			}
+		],
+		"typeProperties": {
+			"schema": "Application",
+			"table": "Cities"
+		}
+	}
+}
