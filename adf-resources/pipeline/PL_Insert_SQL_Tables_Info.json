@@ -21,13 +21,6 @@
 							{
 								"name": "lake_dst_folder",
 								"value": "rl-sql-001"
-							},
-							{
-								"name": "pipeline_date",
-								"value": {
-									"value": "@formatDateTime(utcnow(),'yyyy-MM-dd')",
-									"type": "Expression"
-								}
 							}
 						],
 						"sqlReaderQuery": "SELECT table_catalog, table_schema, table_name\nFROM   information_schema.tables\nWHERE  table_type = 'BASE TABLE' AND table_name NOT LIKE 'BuildVersion' AND table_name NOT LIKE 'ErrorLog'",
@@ -85,16 +78,6 @@
 								},
 								"sink": {
 									"name": "lake_dst_folder",
-									"type": "String",
-									"physicalType": "nvarchar"
-								}
-							},
-							{
-								"source": {
-									"name": "pipeline_date"
-								},
-								"sink": {
-									"name": "pipeline_date",
 									"type": "String",
 									"physicalType": "nvarchar"
 								}
