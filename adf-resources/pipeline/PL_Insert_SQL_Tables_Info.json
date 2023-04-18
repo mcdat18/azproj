@@ -17,6 +17,12 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
+						"additionalColumns": [
+							{
+								"name": "lake_dst_folder",
+								"value": "rl-sql-001"
+							}
+						],
 						"sqlReaderQuery": "SELECT table_catalog, table_schema, table_name\nFROM   information_schema.tables\nWHERE  table_type = 'BASE TABLE' AND table_name NOT LIKE 'BuildVersion' AND table_name NOT LIKE 'ErrorLog'",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
@@ -62,6 +68,16 @@
 								},
 								"sink": {
 									"name": "src_table",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "lake_dst_folder"
+								},
+								"sink": {
+									"name": "lake_dst_folder",
 									"type": "String",
 									"physicalType": "nvarchar"
 								}
