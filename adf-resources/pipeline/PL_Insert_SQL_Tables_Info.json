@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "SELECT table_schema + '.' + table_name AS Table_Name, table_catalog\nFROM   information_schema.tables\nWHERE  table_type = 'BASE TABLE'",
+						"sqlReaderQuery": "SELECT table_schema + '.' + table_name AS Table_Name, table_catalog\nFROM   information_schema.tables\nWHERE  table_type = 'BASE TABLE' AND table_name NOT LIKE 'BuildVersion' AND table_name NOT LIKE 'ErrorLog'",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
