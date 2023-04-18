@@ -31,7 +31,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "pipeline_parameter1"
+			"table": "pipeline_sql_load"
 		}
 	}
 }

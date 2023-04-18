@@ -1,5 +1,5 @@
 {
-	"name": "PL_SQL_to_ADLS",
+	"name": "PL_SQL_to_ADLS_parquet",
 	"properties": {
 		"activities": [
 			{
@@ -68,14 +68,12 @@
 									"partitionOption": "None"
 								},
 								"sink": {
-									"type": "DelimitedTextSink",
+									"type": "ParquetSink",
 									"storeSettings": {
 										"type": "AzureBlobFSWriteSettings"
 									},
 									"formatSettings": {
-										"type": "DelimitedTextWriteSettings",
-										"quoteAllText": true,
-										"fileExtension": ".txt"
+										"type": "ParquetWriteSettings"
 									}
 								},
 								"enableStaging": false,
@@ -96,7 +94,7 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "DS_ADLS2_CSV",
+									"referenceName": "DS_ADLS2_Parquet",
 									"type": "DatasetReference",
 									"parameters": {
 										"containerName": {
@@ -107,7 +105,10 @@
 											"value": "@pipeline().parameters.folderName",
 											"type": "Expression"
 										},
-										"table_name": "@{item().Table_Name}",
+										"table_name": {
+											"value": "@{item().Table_Name}",
+											"type": "Expression"
+										},
 										"table_catalog": {
 											"value": "@{item().Table_Catalog}",
 											"type": "Expression"
