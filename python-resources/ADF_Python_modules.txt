@@ -1,0 +1,7 @@
+pip install azure-mgmt-resource
+pip install azure-mgmt-datafactory
+pip install msrestazure
+pip install azure.mgmt.datafactory
+pip install azure.identity
+
+- Azure Data Factory Cookbook
