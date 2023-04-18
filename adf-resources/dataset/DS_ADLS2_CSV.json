@@ -12,10 +12,13 @@
 			"folderName": {
 				"type": "string"
 			},
-			"table_name": {
+			"dbName": {
 				"type": "string"
 			},
-			"table_catalog": {
+			"schemaName": {
+				"type": "string"
+			},
+			"tableName": {
 				"type": "string"
 			}
 		},
@@ -28,11 +31,11 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": {
-					"value": "@{item().Table_Name}/@{formatDateTime(utcnow(),'yyyy')}/@{formatDateTime(utcnow(),'MM')}/@{formatDateTime(utcnow(),'dd')}/@{item().Table_Name}",
+					"value": "@{item().src_table}.csv",
 					"type": "Expression"
 				},
 				"folderPath": {
-					"value": "@concat(dataset().folderName,'/',dataset().table_catalog,'_csv')",
+					"value": "@concat(dataset().folderName,'/', dataset().dbName, '/',dataset().schemaName, '/' ,'csv', '/' ,formatDateTime(convertFromUtc(utcnow(),'Eastern Standard Time'),'yyyy-MM-dd'))",
 					"type": "Expression"
 				},
 				"fileSystem": {

@@ -61,7 +61,7 @@
 								"source": {
 									"type": "AzureSqlSource",
 									"sqlReaderQuery": {
-										"value": "SELECT * FROM @{item().Table_Name}",
+										"value": "SELECT * FROM @{item().src_schema}.@{item().src_table}",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
@@ -104,12 +104,101 @@
 											"type": "Expression"
 										},
 										"folderName": {
-											"value": "@pipeline().parameters.folderName",
+											"value": "@{item().lake_dst_folder}",
 											"type": "Expression"
 										},
-										"table_name": "@{item().Table_Name}",
-										"table_catalog": {
-											"value": "@{item().Table_Catalog}",
+										"dbName": {
+											"value": "@{item().src_db}",
+											"type": "Expression"
+										},
+										"schemaName": {
+											"value": "@{item().src_schema}",
+											"type": "Expression"
+										},
+										"tableName": {
+											"value": "@{item().src_table}",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						},
+						{
+							"name": "C_Log_File",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "C_SQL_To_Lake",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "AzureSqlSource",
+									"sqlReaderQuery": "SELECT '@{pipeline().DataFactory}' AS datafactory_name,\r\n       '@{pipeline().Pipeline}'                        AS pipeline_name,\r\n       '@{pipeline().RunId}'                           AS runid,\r\n       '@{item().src_db}'                              AS source,\r\n       '@{item().lake_dst_folder}'                            AS destination,\r\n       '@{pipeline().TriggerType}'                     AS triggertype,\r\n       '@{pipeline().TriggerId}'                       AS triggerid,\r\n       '@{pipeline().TriggerName}'                     AS triggername,\r\n       '@{pipeline().TriggerTime}'                     AS triggertime,\r\n       '@{activity('C_SQL_To_Lake').output.rowsCopied}'   AS rowscopied,\r\n       '@{activity('C_SQL_To_Lake').output.rowsRead}'     AS rowsread,\r\n       '@{activity('C_SQL_To_Lake').output.usedParallelCopies}'                                      AS no_parallelcopies,\r\n       '@{activity('C_SQL_To_Lake').output.copyDuration}'                                          AS copyduration_in_secs,\r\n       '@{activity('C_SQL_To_Lake').output.effectiveIntegrationRuntime}'         AS effectiveintegrationruntime,\r\n       '@{activity('C_SQL_To_Lake').output.executionDetails[0].source.type}'                AS source_type,\r\n       '@{activity('C_SQL_To_Lake').output.executionDetails[0].sink.type}'                  AS sink_type,\r\n       '@{activity('C_SQL_To_Lake').output.executionDetails[0].status}'                     AS execution_status,\r\n       '@{activity('C_SQL_To_Lake').output.executionDetails[0].start}'                      AS copyactivity_start_time,\r\n       '@{utcnow()}'                AS copyactivity_end_time,\r\n       '@{activity('C_SQL_To_Lake').output.executionDetails[0].detailedDurations.queuingDuration}'  AS copyactivity_queuingduration_in_secs,\r\n       '@{activity('C_SQL_To_Lake').output.executionDetails[0].detailedDurations.timeToFirstByte}'  AS copyactivity_timetofirstbyte_in_secs,\r\n       '@{activity('C_SQL_To_Lake').output.executionDetails[0].detailedDurations.transferDuration}' AS copyactivity_transferduration_in_secs",
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "DS_CDEV_DB",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DS_Metadata_CSV",
+									"type": "DatasetReference",
+									"parameters": {
+										"containerName": {
+											"value": "@pipeline().parameters.containerName",
+											"type": "Expression"
+										},
+										"folderName": {
+											"value": "@{item().lake_dst_folder}",
+											"type": "Expression"
+										},
+										"dbName": {
+											"value": "@{item().src_db}",
+											"type": "Expression"
+										},
+										"schemaName": {
+											"value": "@{item().src_schema}",
+											"type": "Expression"
+										},
+										"tableName": {
+											"value": "@{item().src_table}",
 											"type": "Expression"
 										}
 									}
@@ -124,10 +213,6 @@
 			"containerName": {
 				"type": "string",
 				"defaultValue": "bronze"
-			},
-			"folderName": {
-				"type": "string",
-				"defaultValue": "rl-sql-001"
 			}
 		},
 		"folder": {

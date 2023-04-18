@@ -61,7 +61,7 @@
 								"source": {
 									"type": "AzureSqlSource",
 									"sqlReaderQuery": {
-										"value": "SELECT * FROM @{item().Table_Name}",
+										"value": "SELECT * FROM  @{item().src_schema}.@{item().src_table}",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
@@ -102,15 +102,19 @@
 											"type": "Expression"
 										},
 										"folderName": {
-											"value": "@pipeline().parameters.folderName",
+											"value": "@{item().lake_dst_folder}",
 											"type": "Expression"
 										},
-										"table_name": {
-											"value": "@{item().Table_Name}",
+										"dbName": {
+											"value": "@{item().src_db}",
 											"type": "Expression"
 										},
-										"table_catalog": {
-											"value": "@{item().Table_Catalog}",
+										"schemaName": {
+											"value": "@{item().src_schema}",
+											"type": "Expression"
+										},
+										"tableName": {
+											"value": "@{item().src_table}",
 											"type": "Expression"
 										}
 									}
@@ -125,10 +129,6 @@
 			"containerName": {
 				"type": "string",
 				"defaultValue": "bronze"
-			},
-			"folderName": {
-				"type": "string",
-				"defaultValue": "rl-sql-001"
 			}
 		},
 		"folder": {

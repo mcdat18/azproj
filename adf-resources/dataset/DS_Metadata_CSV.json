@@ -1,5 +1,5 @@
 {
-	"name": "DS_ADLS2_Parquet",
+	"name": "DS_Metadata_CSV",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "LS_mcdedevdlake",
@@ -26,16 +26,13 @@
 			"name": "SQLDynamicLoad"
 		},
 		"annotations": [],
-		"type": "Parquet",
+		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": {
-					"value": "@{item().src_table}.parquet",
-					"type": "Expression"
-				},
+				"fileName": "@{item().src_table}.csv",
 				"folderPath": {
-					"value": "@concat(dataset().folderName,'/', dataset().dbName, '/',dataset().schemaName, '/' ,'parquet', '/' ,formatDateTime(convertFromUtc(utcnow(),'Eastern Standard Time'),'yyyy-MM-dd'))",
+					"value": "@concat(dataset().folderName,'/', dataset().dbName, '/',dataset().schemaName, '/' ,'metadata', '/' ,formatDateTime(convertFromUtc(utcnow(),'Eastern Standard Time'),'yyyy-MM-dd'))",
 					"type": "Expression"
 				},
 				"fileSystem": {
@@ -43,7 +40,10 @@
 					"type": "Expression"
 				}
 			},
-			"compressionCodec": "snappy"
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
 		},
 		"schema": []
 	}
