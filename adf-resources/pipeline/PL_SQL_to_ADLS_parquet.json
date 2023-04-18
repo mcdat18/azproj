@@ -105,11 +105,11 @@
 											"value": "@pipeline().parameters.folderName",
 											"type": "Expression"
 										},
-										"table_name": {
+										"dbName": {
 											"value": "@{item().Table_Name}",
 											"type": "Expression"
 										},
-										"table_catalog": {
+										"schemaName": {
 											"value": "@{item().Table_Catalog}",
 											"type": "Expression"
 										}
