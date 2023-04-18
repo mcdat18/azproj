@@ -12,10 +12,13 @@
 			"folderName": {
 				"type": "string"
 			},
-			"table_name": {
+			"dbName": {
 				"type": "string"
 			},
-			"table_catalog": {
+			"schemaName": {
+				"type": "string"
+			},
+			"tableName": {
 				"type": "string"
 			}
 		},
