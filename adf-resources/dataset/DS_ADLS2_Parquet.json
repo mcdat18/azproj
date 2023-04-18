@@ -31,7 +31,7 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": {
-					"value": "@{item().src_table}",
+					"value": "@{item().src_table}.parquet",
 					"type": "Expression"
 				},
 				"folderPath": {
