@@ -1,5 +1,5 @@
 {
-	"name": "PL_SQL_to_ADLS",
+	"name": "PL_SQL_to_ADLS_csv",
 	"properties": {
 		"activities": [
 			{
