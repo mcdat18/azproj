@@ -107,7 +107,10 @@
 											"value": "@{item().lake_dst_folder}",
 											"type": "Expression"
 										},
-										"dbName": "@{item().src_sb}",
+										"dbName": {
+											"value": "@{item().src_db}",
+											"type": "Expression"
+										},
 										"schemaName": {
 											"value": "@{item().src_schema}",
 											"type": "Expression"
