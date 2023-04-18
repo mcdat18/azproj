@@ -104,12 +104,16 @@
 											"type": "Expression"
 										},
 										"folderName": {
-											"value": "@pipeline().parameters.folderName",
+											"value": "@{item().lake_dst_folder}",
 											"type": "Expression"
 										},
-										"table_name": "@{item().Table_Name}",
-										"table_catalog": {
-											"value": "@{item().Table_Catalog}",
+										"dbName": "@{item().src_sb}",
+										"schemaName": {
+											"value": "@{item().src_schema}",
+											"type": "Expression"
+										},
+										"tableName": {
+											"value": "@{item().src_table}",
 											"type": "Expression"
 										}
 									}
