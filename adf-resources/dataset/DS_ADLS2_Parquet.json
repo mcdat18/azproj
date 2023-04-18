@@ -32,7 +32,7 @@
 					"type": "Expression"
 				},
 				"folderPath": {
-					"value": "@concat(dataset().folderName,'/', dataset().table_catalog,'_parquet')",
+					"value": "@concat(dataset().folderName,'/', dataset().table_catalog, '/','parquet')",
 					"type": "Expression"
 				},
 				"fileSystem": {
