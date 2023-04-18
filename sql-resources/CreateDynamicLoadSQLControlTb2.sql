@@ -27,7 +27,6 @@ CREATE TABLE [dbo].[pipeline_sql_advload]
      [file_type]                          [NVARCHAR](500) NULL,
      [lake_dst_folder]                    [NVARCHAR](500) NULL,
      [spark_flag]                         [NVARCHAR](500) NULL,
-     [dst_schema]                         [NVARCHAR](500) NULL,
      [distribution_type]                  [NVARCHAR](500) NULL,
      [load_sqldw_etl_pipeline_date]       [DATETIME] NULL,
      [load_sqldw_etl_pipeline_status]     [NVARCHAR](500) NULL,
