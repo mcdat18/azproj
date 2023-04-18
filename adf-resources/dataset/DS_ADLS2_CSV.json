@@ -35,7 +35,7 @@
 					"type": "Expression"
 				},
 				"folderPath": {
-					"value": "@{item().lake_dst_folder/@{item().src_db}/@{item().pipeline_date}/csv",
+					"value": "@{item().lake_dst_folder}/@{item().src_db}/@{item().pipeline_date}/csv",
 					"type": "Expression"
 				},
 				"fileSystem": {
