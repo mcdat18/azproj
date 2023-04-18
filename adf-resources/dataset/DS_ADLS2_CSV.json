@@ -31,11 +31,11 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": {
-					"value": "@{item().Table_Name}",
+					"value": "@{item().src_table}.csv",
 					"type": "Expression"
 				},
 				"folderPath": {
-					"value": "@concat(dataset().folderName,'/',dataset().table_catalog,'/',formatDateTime(utcnow(),'yyyy-MM-dd'),'/','csv')",
+					"value": "@concat(dataset().folderName,'/',dataset().dbName,'/',formatDateTime(utcnow(),'yyyy-MM-dd'),'/','csv')",
 					"type": "Expression"
 				},
 				"fileSystem": {
