@@ -35,7 +35,7 @@
 					"type": "Expression"
 				},
 				"folderPath": {
-					"value": "@{item().lake_dst_folder}/@{item().src_db}/@{item().pipeline_date}/csv",
+					"value": "@concat(dataset().folderName,'/', dataset().dbName, '/',dataset().schemaName,'/',formatDateTime(convertFromUtc(utcnow(),'EST'),'yyy-MM-dd'), '/', 'csv')",
 					"type": "Expression"
 				},
 				"fileSystem": {
