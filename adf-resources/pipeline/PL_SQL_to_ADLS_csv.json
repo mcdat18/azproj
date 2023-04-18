@@ -124,10 +124,6 @@
 			"containerName": {
 				"type": "string",
 				"defaultValue": "bronze"
-			},
-			"folderName": {
-				"type": "string",
-				"defaultValue": "rl-sql-001"
 			}
 		},
 		"folder": {
