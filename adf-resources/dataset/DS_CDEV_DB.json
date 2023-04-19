@@ -31,7 +31,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "db_pipeline_metadata"
+			"table": "db_pipeline_sql_load"
 		}
 	}
 }
