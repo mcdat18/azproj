@@ -1,0 +1,23 @@
+{
+	"name": "DS_BronzeCSV",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_mcdedevdlake",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "MetadataAudit_1"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
