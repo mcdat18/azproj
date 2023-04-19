@@ -1,5 +1,5 @@
 {
-	"name": "PL_Orchestration_CP_SQL",
+	"name": "PL_Orchestration_CP_ADLS",
 	"properties": {
 		"description": "ADFCookbook",
 		"activities": [
