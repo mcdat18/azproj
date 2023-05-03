@@ -15,7 +15,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/ProjectMain/DE/dataPipelineApp/ingestion/customer",
+					"notebookPath": "/Repos/AZProj/azproj/databricks-resources/dataPipelineApp/ingestion/customer",
 					"baseParameters": {
 						"p_file_date": {
 							"value": "@formatDateTime(pipeline().parameters.p_processing_date, 'yyyy-MM-dd')",
@@ -41,7 +41,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/ProjectMain/DE/dataPipelineApp/ingestion/customerDrivers",
+					"notebookPath": "/Repos/AZProj/azproj/databricks-resources/dataPipelineApp/ingestion/customerDrivers",
 					"baseParameters": {
 						"p_file_date": {
 							"value": "@formatDateTime(pipeline().parameters.p_processing_date, 'yyyy-MM-dd')",
@@ -67,7 +67,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/ProjectMain/DE/dataPipelineApp/ingestion/loanTransaction",
+					"notebookPath": "/Repos/AZProj/azproj/databricks-resources/dataPipelineApp/ingestion/loanTransaction",
 					"baseParameters": {
 						"p_file_date": {
 							"value": "@formatDateTime(pipeline().parameters.p_processing_date, 'yyyy-MM-dd')",
@@ -112,7 +112,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/ProjectMain/DE/dataPipelineApp/enrichment/customer"
+					"notebookPath": "/Repos/AZProj/azproj/databricks-resources/dataPipelineApp/enrichment/customer"
 				},
 				"linkedServiceName": {
 					"referenceName": "LS_adevdbricks",
@@ -139,7 +139,13 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/ProjectMain/DE/dataPipelineApp/enrichment/loanTrx"
+					"notebookPath": "/Repos/AZProj/azproj/databricks-resources/dataPipelineApp/enrichment/loanTrx",
+					"baseParameters": {
+						"p_file_date": {
+							"value": "@formatDateTime(pipeline().parameters.p_processing_date, 'yyyy-MM-dd')",
+							"type": "Expression"
+						}
+					}
 				},
 				"linkedServiceName": {
 					"referenceName": "LS_adevdbricks",
