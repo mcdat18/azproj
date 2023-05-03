@@ -1,0 +1,52 @@
+{
+	"name": "DS_ADLS2_CSV",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_mcdedevdlake",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"containerName": {
+				"type": "string"
+			},
+			"folderName": {
+				"type": "string"
+			},
+			"dbName": {
+				"type": "string"
+			},
+			"schemaName": {
+				"type": "string"
+			},
+			"tableName": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "SQLDynamicLoad"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@{item().src_table}.csv",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@concat(dataset().folderName,'/', dataset().dbName, '/',dataset().schemaName, '/' ,'csv', '/' ,formatDateTime(convertFromUtc(utcnow(),'Eastern Standard Time'),'yyyy-MM-dd'))",
+					"type": "Expression"
+				},
+				"fileSystem": {
+					"value": "@dataset().containerName",
+					"type": "Expression"
+				}
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
