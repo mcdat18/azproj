@@ -4,7 +4,7 @@ SET ansi_nulls ON
 go
 SET quoted_identifier ON
 go
-CREATE TABLE [dbo].[pipeline_sql_load]
+CREATE TABLE [dbo].[db_pipeline_sql_load]
   (
      [parameter_id]  [INT] IDENTITY(1, 1) NOT NULL,
      [table_name]    [NVARCHAR](500) NULL,
