@@ -1,0 +1,5 @@
+Options:
+1. PolyBase with T-SQL - requires to define external data objects
+2. PolyBase with SSIS works well when your source data is in SQL Server. SSIS defines the source to destination table mappings, and also orchestrates the load
+3. PolyBase with Azure Data Factory (ADF) is another orchestration tool.
+4. PolyBase with Azure Databricks transfers data from an Azure Synapse Analytics table to a Databricks dataframe and/or writes data from a Databricks dataframe to an Azure Synapse Analytics table using PolyBase
