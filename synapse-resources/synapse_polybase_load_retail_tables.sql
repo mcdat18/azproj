@@ -1,5 +1,6 @@
 
 --DimProduct
+IF NOT EXISTS (SELECT * FROM sys.objects O JOIN sys.schemas S ON O.schema_id = S.schema_id WHERE O.NAME = 'DimProduct' AND O.TYPE = 'U' AND S.NAME = 'retailSTG')
 CREATE EXTERNAL TABLE [retailSTG].DimProduct (
     [ProductKey] [int] NOT NULL,
     [ProductLabel] [nvarchar](255) NULL,
@@ -45,6 +46,7 @@ WITH
 ;
 
 --FactOnlineSales
+IF NOT EXISTS (SELECT * FROM sys.objects O JOIN sys.schemas S ON O.schema_id = S.schema_id WHERE O.NAME = 'FactOnlineSales' AND O.TYPE = 'U' AND S.NAME = 'retailSTG')
 CREATE EXTERNAL TABLE [retailSTG].FactOnlineSales
 (
     [OnlineSalesKey] [int]  NOT NULL,
